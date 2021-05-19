@@ -10,14 +10,27 @@ async function app(state, update, view){
         console.log(title)
         printTable(table)
         const {input1} = await inputForm1(model)
-        const {input2} = await inputForm2(model)
-        const {input3} = await listForm1(model)
-        const {input4} = await listForm2(model)
-        const updatedModel = update(input1, input2, input3, input4, model)
-        state = {
-            ...state,
-            model: updatedModel,
-            currentView: view(updatedModel)
+        if (input1 === 'Y'){
+            const {input2} = await inputForm2(model)
+            const {input4} = await listForm1(model)
+            const {input5} = await listForm2(model)
+            const updatedModel = update(input1, input2, input4, input5, model)
+            state = {
+                ...state,
+                model: updatedModel,
+                currentView: view(updatedModel)
+            }
+        }
+        else{
+            const {input3} = await inputForm3(model)
+            const {input4} = await listForm1(model)
+            const {input5} = await listForm2(model)
+            const updatedModel = update(input1, input3, input4, input5, model)
+            state = {
+                ...state,
+                model: updatedModel,
+                currentView: view(updatedModel)
+        }
         }
     }
 }

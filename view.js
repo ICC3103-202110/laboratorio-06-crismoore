@@ -53,7 +53,7 @@ function inputForm2(model){
 
 function inputForm3(model){
     const {input3} = model
-    const message = 'From?'
+    const message = 'Temperature value to convert?'   
     return inquirer.prompt([
         {
             name: 'input3',
@@ -64,9 +64,10 @@ function inputForm3(model){
     ])
 }
 
+
 function inputForm4(model){
     const {input4} = model
-    const message = 'To?'
+    const message = 'From?'
     return inquirer.prompt([
         {
             name: 'input4',
@@ -77,28 +78,41 @@ function inputForm4(model){
     ])
 }
 
-function listForm1(model){
-    const {input3} = model
-    const message = 'From?'
-    const choices = ['Celsius', 'Fahrenheit', 'Kelvin']
-    return inquirer.prompt({
-        name: 'input3',
-        type: 'list',
-        message: message, 
-        default: input3,
-        choices: choices
-    })
+function inputForm5(model){
+    const {input5} = model
+    const message = 'To?'
+    return inquirer.prompt([
+        {
+            name: 'input5',
+            type: 'input5',
+            message: message,
+            default: input5
+        }
+    ])
 }
 
-function listForm2(model){
+function listForm1(model){
     const {input4} = model
-    const message = 'To?'
+    const message = 'From?'
     const choices = ['Celsius', 'Fahrenheit', 'Kelvin']
     return inquirer.prompt({
         name: 'input4',
         type: 'list',
         message: message, 
         default: input4,
+        choices: choices
+    })
+}
+
+function listForm2(model){
+    const {input5} = model
+    const message = 'To?'
+    const choices = ['Celsius', 'Fahrenheit', 'Kelvin']
+    return inquirer.prompt({
+        name: 'input5',
+        type: 'list',
+        message: message, 
+        default: input5,
         choices: choices
     })
 }
@@ -118,6 +132,7 @@ module.exports = {
     inputForm2,
     inputForm3,
     inputForm4,
+    inputForm5,
     listForm1,
     listForm2
 }

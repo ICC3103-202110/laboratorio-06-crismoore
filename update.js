@@ -32,15 +32,34 @@ function convert(temp_value, inputFrom, inputTo){
 }
 
 
-function update(input1, input2, input3, input4, model){
+function update(input1, input, input4, input5, model){
     const {left_value} = model
     const {left_unit} = model
     const {right_value} = model
     const {right_unit} = model
     if (input1 === 'Y'){
-        const new_left_value = input2
-        const new_left_unit = input3
-        const new_right_value = convert(input2, input3, input4)
+        const new_left_value = input
+        const new_left_unit = input4
+        const new_right_value = convert(input, input4, input5)
+        const new_right_unit = input5
+        return {
+            ...model,
+            left_value: new_left_value,
+            left_unit: new_left_unit,
+            right_value: new_right_value,
+            right_unit: new_right_unit,
+            input1: 'Y/n',
+            input2: new_left_value,
+            input3: new_right_value,
+            input4: input4,
+            input5: input5
+        }
+    }
+    else if (input1 === 'n')
+    {
+        const new_left_value = convert(input, input4, input5)
+        const new_left_unit = input5
+        const new_right_value = input
         const new_right_unit = input4
         return {
             ...model,
@@ -49,33 +68,12 @@ function update(input1, input2, input3, input4, model){
             right_value: new_right_value,
             right_unit: new_right_unit,
             input1: 'Y/n',
-            input2: input2,
-            input3: input3,
-            input4: input4
+            input2: new_left_value,
+            input3: new_right_value,
+            input4: input4,
+            input5: input5,
         }
-    }
-    else if (input1 === 'n')
-    {
-        const new_left_value = convert(input2, input3, input4)
-        const new_left_unit = input4
-        const new_right_value = input2
-        const new_right_unit = input3
-        return {
-            ...model,
-            left_value: new_left_value,
-            left_unit: new_left_unit,
-            right_value: new_right_value,
-            right_unit: new_right_unit,
-            input1: 'Y/n',
-            input2: input2,
-            input3: input3,
-            input4: input4
-        }
-    }
-    else{
-        console.log('Please enter Y or n');
-        uptade(input1,input2,input3,input4,model);
-    }    
+    }   
     
 }
 

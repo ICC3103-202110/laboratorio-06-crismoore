@@ -5,8 +5,9 @@ initModel = {
     right_unit: 'Fahrenheit',
     input1: 'Y/n',
     input2: '0',
-    input3: ' ',
-    input4: ' '
+    input3: '0',
+    input4: ' ',
+    input5: ' '
 }
 
 module.exports = {
