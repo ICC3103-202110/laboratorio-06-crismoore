@@ -1,8 +1,8 @@
 initModel = {
     left_value: 0,
-    left_unit: 0,
-    right_value: 0,
-    right_unit: 0,
+    left_unit: 'Celsius',
+    right_value: 32,
+    right_unit: 'Fahrenheit',
     input1: 'Y/n',
     input2: '0',
     input3: ' ',

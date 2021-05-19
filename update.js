@@ -1,33 +1,82 @@
-function TOTAL(amount,Tip){
-    total = amount+Tip
-    total = total.toFixed(2)
-    return Number(total)
-}
-
-function TIP(amount, tip_per){
-    Tip=(amount*tip_per)/100
-    Tip = Tip.toFixed(2)
-    return Number(Tip)
-}
-
-function update(input1, input2, model){
-    const {bill_amount} = model
-    const {tip_per} = model
-    const {Tip} = model
-    const {Total} = model
-    const newbill = Number(input1)
-    const newtipper = Number(input2)
-    const newTip = TIP(newbill, newtipper)
-    const newtotal = TOTAL(newbill, newTip)
-    return {
-        ...model,
-        bill_amount: '$'+newbill,
-        tip_per: newtipper+'%',
-        Tip: '$'+newTip,
-        Total: '$'+newtotal,
-        input1: input1,
-        input2: input2
+function convert(temp_value, inputFrom, inputTo){
+    switch(inputFrom){
+        case 'Celsius':
+            switch(inputTo){
+                case 'Celsius':
+                    return 1*temp_value;
+                case 'Fahrenheit':
+                    return ((1*temp_value)-32)*(5/9);
+                case 'Kelvin':
+                    return 1*temp_value+273.15;
+            }
+        case 'Fahrenheit': 
+            switch(inputTo){
+                case 'Celsius':
+                    return (5*(1*temp_value-32))/9;
+                case 'Fahrenheit':
+                    return 1*temp_value;
+                case 'Kelvin':
+                    return (5*(1*temp_value-32)/9 + 273.15);
+            }
+        case 'Kelvin': 
+            switch(inputTo){
+                case 'Celsius':
+                    return 1*temp_value-273.15;
+                case 'Fahrenheit':
+                    return (9*(1*temp_value-273.15)/5 + 32);
+                case 'Kelvin':
+                    return 1*temp_value;
+            }
     }
+
+}
+
+
+function update(input1, input2, input3, input4, model){
+    const {left_value} = model
+    const {left_unit} = model
+    const {right_value} = model
+    const {right_unit} = model
+    if (input1 === 'Y'){
+        const new_left_value = input2
+        const new_left_unit = input3
+        const new_right_value = convert(input2, input3, input4)
+        const new_right_unit = input4
+        return {
+            ...model,
+            left_value: new_left_value,
+            left_unit: new_left_unit,
+            right_value: new_right_value,
+            right_unit: new_right_unit,
+            input1: 'Y/n',
+            input2: input2,
+            input3: input3,
+            input4: input4
+        }
+    }
+    else if (input1 === 'n')
+    {
+        const new_left_value = convert(input2, input3, input4)
+        const new_left_unit = input4
+        const new_right_value = input2
+        const new_right_unit = input3
+        return {
+            ...model,
+            left_value: new_left_value,
+            left_unit: new_left_unit,
+            right_value: new_right_value,
+            right_unit: new_right_unit,
+            input1: 'Y/n',
+            input2: input2,
+            input3: input3,
+            input4: input4
+        }
+    }
+    else{
+        console.log('Please enter Y or n');
+        uptade(input1,input2,input3,input4,model);
+    }    
+    
 }
 
 module.exports = {
